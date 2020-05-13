@@ -1,0 +1,41 @@
+{
+	"name": "@volkovasystem/format-json-file",
+	"version": "0.0.0",
+	"description": "Reformat JSON file to use hard tab and double quotes.",
+	"main": "format-json-file.js",
+	"scripts": {
+		"test": "node ./format-json-file.test.js",
+		"clean": "rm -Rfv ./node_modules &> /dev/null && rm ./format-json-file.js &> /dev/null",
+		"compress": "npx terser ./format-json-file.module.js --compress --comments all --output ./format-json-file.js",
+		"modularize": "npx babel --plugins @babel/plugin-transform-modules-umd ./format-json-file.js --out-file ./format-json-file.js",
+		"minify": "npx terser ./format-json-file.js --compress --comments all --output ./format-json-file.js",
+		"build": "npm run compress && npm run modularize && npm run minify",
+		"deploy": "npm run clean && npm install && npm run build && npm test",
+		"prepublishOnly": "npm run clean && npm install && npm run build && npm test",
+		"format-json-file": "node ./format-json-file.run.js"
+	},
+	"bin": {
+		"format-json-file": "format-json-file.run.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/volkovasystem/format-json-file.git"
+	},
+	"keywords": [
+		"format-json-file",
+		"format",
+		"json",
+		"file"
+	],
+	"author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/volkovasystem/format-json-file/issues"
+	},
+	"homepage": "https://github.com/volkovasystem/format-json-file#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.0",
+		"@babel/plugin-transform-modules-umd": "^7.9.0"
+	}
+}
