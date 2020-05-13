@@ -1,5 +1,9 @@
 #! /usr/bin/env node
 
+const FILE_PATH_SHELL_PARAMETER = (
+	"--filePath"
+);
+
 (
 	async	function runFormatJSONFile( shellParameterList ){
 				"use strict";
@@ -8,7 +12,15 @@
 
 				return	(
 							await	formatJSONFile(
-										shellParameterList[ 2 ]
+										shellParameterList[
+											(
+													shellParameterList
+													.indexOf(
+														FILE_PATH_SHELL_PARAMETER
+													)
+												+	1
+											)
+										]
 									)
 						);
 			}
