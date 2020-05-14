@@ -5,13 +5,13 @@
 	"main": "format-json-file.js",
 	"scripts": {
 		"test": "node ./format-json-file.test.js",
-		"clean": "rm -Rfv ./node_modules &> /dev/null && rm ./format-json-file.js &> /dev/null",
+		"clean": "rm -Rfv ./node_modules || true && rm ./format-json-file.js || true",
 		"compress": "npx terser ./format-json-file.module.js --compress --comments all --output ./format-json-file.js",
 		"modularize": "npx babel --plugins @babel/plugin-transform-modules-umd ./format-json-file.js --out-file ./format-json-file.js",
 		"minify": "npx terser ./format-json-file.js --compress --comments all --output ./format-json-file.js",
 		"build": "npm run compress && npm run modularize && npm run minify",
 		"deploy": "npm run clean && npm install && npm run build && npm test",
-		"prepublishOnly": "npm run clean && npm install && npm run build && npm test",
+		"prepublishOnly": "npm run deploy",
 		"format-json-file": "node ./format-json-file.run.js"
 	},
 	"bin": {
@@ -34,8 +34,8 @@
 	},
 	"homepage": "https://github.com/volkovasystem/format-json-file#readme",
 	"devDependencies": {
-		"@babel/cli": "^7.8.4",
-		"@babel/core": "^7.9.0",
-		"@babel/plugin-transform-modules-umd": "^7.9.0"
+		"@babel/cli": "npm:@volkovasystem/babel-cli@^7.8.5",
+		"@babel/core": "npm:@volkovasystem/babel-core@^7.9.7",
+		"@babel/plugin-transform-modules-umd": "npm:@volkovasystem/babel-plugin-transform-modules-umd@^7.9.1"
 	}
 }
