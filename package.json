@@ -1,6 +1,6 @@
 {
 	"name": "@volkovasystem/format-json-file",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Reformat JSON file to use hard tab and double quotes.",
 	"main": "format-json-file.js",
 	"scripts": {
