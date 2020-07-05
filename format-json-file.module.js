@@ -71,12 +71,13 @@ const formatJSONFile = (
 									<@required;>
 								]
 							",
+
 							"option": "
 								[
 									@type:
 											object with {
-												"sortProperty": "[@type: boolean;]",
-												"propertyList": "[@type: object as Array;]"
+												"sortProperty": "[@type:boolean;]",
+												"propertyList": "[@type:object as Array;]"
 											}
 									@end-type
 
@@ -94,8 +95,8 @@ const formatJSONFile = (
 											object as Error
 									@end-type
 
-									<@tag: invalid-json-file;>
-									<@tag: cannot-format-json-file;>
+									<@tag:invalid-json-file-path;>
+									<@tag:cannot-format-json-file;>
 								]
 							"
 						}
@@ -132,7 +133,9 @@ const formatJSONFile = (
 									(
 										await	fsAsync
 												.stat(
-													filePath
+													(
+														filePath
+													)
 												)
 									)
 									.isFile( )
@@ -142,28 +145,38 @@ const formatJSONFile = (
 						&&	(
 									JSON_FILE_EXTENSION_PATTERN
 									.test(
-										filePath
+										(
+											filePath
+										)
 									)
 								===	true
 							)
 					){
 						option = (
-								option
+								(
+									option
+								)
 
-							||	{ }
+							||	(
+									{ }
+								)
 						);
 
 						const JSONFileContent = (
 							await	fsAsync
 									.readFile(
-										filePath
+										(
+											filePath
+										)
 									)
 						);
 
 						const JSONData = (
 							JSON
 							.parse(
-								JSONFileContent
+								(
+									JSONFileContent
+								)
 							)
 						);
 
@@ -180,15 +193,19 @@ const formatJSONFile = (
 												(
 														Array
 														.isArray(
-															option
-															.propertyList
+															(
+																option
+																.propertyList
+															)
 														)
 													===	true
 												)
 
 											&&	(
-														option
-														.propertyList
+														(
+															option
+															.propertyList
+														)
 														.length
 													>	0
 												)
@@ -213,7 +230,9 @@ const formatJSONFile = (
 															);
 													}
 
-													return	data;
+													return	(
+																data
+															);
 												},
 
 												(
@@ -244,7 +263,9 @@ const formatJSONFile = (
 															);
 													}
 
-													return	data;
+													return	(
+																data
+															);
 												},
 
 												(
@@ -258,41 +279,50 @@ const formatJSONFile = (
 								)
 						);
 
-						await	fsAsync
-								.writeFile(
-									(
-										filePath
-									),
+						(
+							await	fsAsync
+									.writeFile(
+										(
+											filePath
+										),
 
-									(
-										JSON
-										.stringify(
-											(
-												JSONFormattedData
-											),
+										(
+											JSON
+											.stringify(
+												(
+													JSONFormattedData
+												),
 
-											(
-												null
-											),
+												(
+													null
+												),
 
-											(
-												JSON_SPACE_CHARACTER
+												(
+													JSON_SPACE_CHARACTER
+												)
 											)
 										)
 									)
-								);
+						);
 
-						return	true;
+						return	(
+									true
+								);
 					}
 					else{
 						throw	(
 									new	Error(
-											[
-												"#invalid-json-file;",
+											(
+												[
+													"#invalid-json-file-path;",
 
-												"cannot format json file",
-												"json file invalid"
-											]
+													"cannot format json file;",
+													"invalid json file path;",
+
+													"@file-path:",
+													`${ filePath };`
+												]
+											)
 										)
 								);
 					}
@@ -300,13 +330,17 @@ const formatJSONFile = (
 				catch( error ){
 					throw	(
 								new	Error(
-										[
-											"#cannot-format-json-file;",
+										(
+											[
+												"#cannot-format-json-file;",
 
-											"cannot execute format json file",
+												"cannot format json file;",
+												"cannot execute format json file;",
 
-											`@error-data: ${ util.inspect( error ) }`
-										]
+												"@error-data:",
+												`${ util.inspect( error ) };`
+											]
+										)
 									)
 							);
 				}
