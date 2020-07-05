@@ -1,17 +1,17 @@
 {
 	"name": "@volkovasystem/format-json-file",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Reformat JSON file to use hard tab and double quotes.",
 	"main": "format-json-file.js",
 	"scripts": {
+		"clean": "rm -rf ./node_modules || true && npm cache clean --force",
+		"reset": "npm run clean && rm -rfv ./format-json-file.js || true && rm -rfv ./.build || true",
+		"bundle": "npx parcel build ./*.module.js --no-cache --no-source-maps --no-minify --target node --bundle-node-modules --out-dir ./.build --out-file ./format-json-file.js --global formatJSONFile && mv ./.build/format-json-file.js ./format-json-file.js && rm -rfv ./.build || true",
+		"compress": "npx terser ./format-json-file.js --compress --comments all --output ./format-json-file.js",
+		"build": "npm run bundle && npm run compress",
 		"test": "node ./format-json-file.test.js",
-		"clean": "rm -Rfv ./node_modules || true && rm ./format-json-file.js || true",
-		"compress": "npx terser ./format-json-file.module.js --compress --comments all --output ./format-json-file.js",
-		"modularize": "npx babel --plugins @babel/plugin-transform-modules-umd ./format-json-file.js --out-file ./format-json-file.js",
-		"minify": "npx terser ./format-json-file.js --compress --comments all --output ./format-json-file.js",
-		"build": "npm run compress && npm run modularize && npm run minify",
-		"deploy": "npm run clean && npm install && npm run build && npm test",
-		"prepublishOnly": "npm run deploy",
+		"stage": "npm run reset && npm install && npm run build && npm test && npm run clean",
+		"prepublishOnly": "npm run stage",
 		"format-json-file": "node ./format-json-file.run.js"
 	},
 	"bin": {
@@ -28,14 +28,16 @@
 		"file"
 	],
 	"author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+	"contributors": [
+		"Richeve S. Bebedor <richeve.bebedor@gmail.com>"
+	],
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/volkovasystem/format-json-file/issues"
 	},
 	"homepage": "https://github.com/volkovasystem/format-json-file#readme",
 	"devDependencies": {
-		"@babel/cli": "npm:@volkovasystem/babel-cli@^7.8.5",
-		"@babel/core": "npm:@volkovasystem/babel-core@^7.9.7",
-		"@babel/plugin-transform-modules-umd": "npm:@volkovasystem/babel-plugin-transform-modules-umd@^7.9.1"
+		"terser": "npm:@volkovasystem/terser@4.6.13",
+		"parcel": "npm:@volkovasystem/parcel-bundler@1.12.4"
 	}
 }
