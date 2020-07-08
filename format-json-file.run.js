@@ -46,7 +46,7 @@ const JSON_FILE_EXTENSION_PATTERN = (
 												FILE_PATH_SHELL_PARAMETER
 											)
 										)
-									)++
+									)+1
 								)
 							]
 						)
@@ -102,7 +102,7 @@ const JSON_FILE_EXTENSION_PATTERN = (
 													PROPERTY_LIST_SHELL_PARAMETER
 												)
 											)
-										)++
+										)+1
 									)
 								]
 							)
