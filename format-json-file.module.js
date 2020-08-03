@@ -9,11 +9,13 @@
 
 		@copyright:
 			Richeve S. Bebedor
+
 			<
-				@year-range:
+				@license-year-range:
 					2020-present
-				@end-year-range
+				@end-license-year-range
 			>
+
 			<
 				@contact-detail:
 					richeve.bebedor@gmail.com
@@ -44,7 +46,10 @@
 const fs = require( "fs" );
 const util = require( "util" );
 
-const fsAsync = fs.promises;
+const fsAsync = (
+	fs
+	.promises
+);
 
 const JSON_FILE_EXTENSION_PATTERN = (
 	/\.json$/
@@ -88,6 +93,18 @@ const formatJSONFile = (
 						}
 					@end-parameter-definition
 
+					@result-definition:
+						{
+							"result": "
+								[
+									@type:
+											boolean
+									@end-type
+								]
+							"
+						}
+					@end-result-definition
+
 					@trigger-definition:
 						{
 							"trigger": "
@@ -102,18 +119,6 @@ const formatJSONFile = (
 							"
 						}
 					@end-trigger-definition
-
-					@result-definition:
-						{
-							"result": "
-								[
-									@type:
-											boolean
-									@end-type
-								]
-							"
-						}
-					@end-result-definition
 				*/
 
 				try{
@@ -244,7 +249,9 @@ const formatJSONFile = (
 									:	(
 											Object
 											.keys(
-												JSONData
+												(
+													JSONData
+												)
 											)
 											.sort( )
 											.reduce(
