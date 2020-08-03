@@ -2,7 +2,10 @@
 
 const assert = require( "assert" );
 
-const strictAssert = assert.strict;
+const strictAssert = (
+	assert
+	.strict
+);
 
 const formatJSONFile = (
 	require( "./format-json-file.js" )
@@ -11,6 +14,10 @@ const formatJSONFile = (
 const TEST_PACKAGE_JSON_FILE = (
 	async	function TEST_PACKAGE_JSON_FILE( ){
 				try{
+					const testValue = (
+						true
+					);
+
 					strictAssert
 					.equal(
 						(
@@ -22,7 +29,7 @@ const TEST_PACKAGE_JSON_FILE = (
 						),
 
 						(
-							true
+							testValue
 						),
 
 						(
@@ -30,7 +37,7 @@ const TEST_PACKAGE_JSON_FILE = (
 								"#test-package-json-file;",
 
 								"test package json file;",
-								"must return true;"
+								`must return ${ testValue };`
 							]
 						)
 					);
@@ -57,6 +64,10 @@ const TEST_PACKAGE_JSON_FILE = (
 const TEST_PACKAGE_LOCK_JSON_FILE = (
 	async	function TEST_PACKAGE_LOCK_JSON_FILE( ){
 				try{
+					const testValue = (
+						true
+					);
+
 					strictAssert
 					.equal(
 						(
@@ -68,7 +79,7 @@ const TEST_PACKAGE_LOCK_JSON_FILE = (
 						),
 
 						(
-							true
+							testValue
 						),
 
 						(
@@ -76,7 +87,7 @@ const TEST_PACKAGE_LOCK_JSON_FILE = (
 								"#test-package-lock-json-file;",
 
 								"test package lock json file;",
-								"must return true;"
+								`must return ${ testValue };`
 							]
 						)
 					);
@@ -104,27 +115,29 @@ const TEST_PACKAGE_LOCK_JSON_FILE = (
 	async	function TEST_SCENE_BASIC( ){
 				console
 				.table(
-					[
-						{
-							"test": (
-								"test package json file"
-							),
+					(
+						[
+							{
+								"test": (
+									"test package json file"
+								),
 
-							"result": (
-								await	TEST_PACKAGE_JSON_FILE( )
-							)
-						},
+								"result": (
+									await	TEST_PACKAGE_JSON_FILE( )
+								)
+							},
 
-						{
-							"test": (
-								"test package lock json file"
-							),
+							{
+								"test": (
+									"test package lock json file"
+								),
 
-							"result": (
-								await	TEST_PACKAGE_LOCK_JSON_FILE( )
-							)
-						}
-					]
+								"result": (
+									await	TEST_PACKAGE_LOCK_JSON_FILE( )
+								)
+							}
+						]
+					)
 				);
 			}
 )( );
