@@ -59,9 +59,13 @@ const JSON_SPACE_CHARACTER = (
 	"\t"
 );
 
-const NEW_LINE = (
+const NEW_LINE_CHARACTER = (
 	"\n"
 );
+
+const END_OF_LINE_TOKEN = (
+	"\r\n"
+)
 
 const formatJSONFile = (
 	async	function formatJSONFile( filePath, option ){
@@ -315,9 +319,19 @@ const formatJSONFile = (
 														)
 													)
 													.trim( )
+													.split(
+														(
+															NEW_LINE_CHARACTER
+														)
+													)
+													.join(
+														(
+															END_OF_LINE_TOKEN
+														)
+													)
 												)
 											+	(
-													NEW_LINE
+													END_OF_LINE_TOKEN
 												)
 										)
 									)
