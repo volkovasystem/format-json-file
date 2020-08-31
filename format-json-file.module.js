@@ -2,26 +2,26 @@
 
 /*;
 	@license;
-	@module-license:
+	@start:license:module:
 		MIT License
 
 		Copyright (c) 2020-present Richeve S. Bebedor <richeve.bebedor@gmail.com>
 
-		@copyright:
+		@start:license:copyright:
 			Richeve S. Bebedor
 
 			<
-				@license-year-range:
+				@start:license:year-range:
 					2020-present
-				@end-license-year-range
+				@end:license:year-range;
 			>
 
 			<
-				@contact-detail:
+				@start:license:contact-detail:
 					richeve.bebedor@gmail.com
-				@end-contact-detail
+				@end:license:contact-detail;
 			>
-		@end-copyright
+		@end:license:copyright;
 
 		Permission is hereby granted, free of charge, to any person obtaining a copy
 		of this software and associated documentation files (the "Software"), to deal
@@ -40,47 +40,23 @@
 		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 		SOFTWARE.
-	@end-module-license
+	@end:license:module;
 */
-
-const fs = require( "fs" );
-const util = require( "util" );
-
-const fsAsync = (
-	fs
-	.promises
-);
-
-const JSON_FILE_EXTENSION_PATTERN = (
-	/\.json$/
-);
-
-const JSON_SPACE_CHARACTER = (
-	"\t"
-);
-
-const NEW_LINE_CHARACTER = (
-	"\n"
-);
-
-const END_OF_LINE_TOKEN = (
-	"\r\n"
-)
 
 const formatJSONFile = (
 	async	function formatJSONFile( filePath, option ){
 				/*;
-					@procedure-definition:
+					@start:definition:procedure:
 						Reformat JSON file to use hard tab and double quotes.
-					@end-procedure-definition
+					@end:definition:procedure;
 
-					@parameter-definition:
+					@start:definition:parameter:
 						{
 							"filePath": "
 								[
-									@type:
+									@start:definition:type:
 											string
-									@end-type
+									@end:definition:type;
 
 									<@required;>
 								]
@@ -88,46 +64,83 @@ const formatJSONFile = (
 
 							"option": "
 								[
-									@type:
+									@start:definition:type:
 											object with {
-												"sortProperty": "[@type:boolean;]",
-												"propertyList": "[@type:object as Array;]"
+												"sortProperty": "
+													[
+														@start:definition:type:
+																boolean
+														@end:definition:type;
+													]
+												",
+
+												"propertyList": "
+													[
+														@start:definition:type:
+																object as Array
+														@end:definition:type;
+													]
+												"
 											}
-									@end-type
+									@end:definition:type;
 
 									<@optional;>
 								]
 							"
 						}
-					@end-parameter-definition
+					@end:definition:parameter;
 
-					@result-definition:
+					@start:definition:result:
 						{
 							"result": "
 								[
-									@type:
+									@start:definition:type:
 											boolean
-									@end-type
+									@end:definition:type;
 								]
 							"
 						}
-					@end-result-definition
+					@end:definition:result;
 
-					@trigger-definition:
+					@start:definition:trigger:
 						{
 							"trigger": "
 								[
-									@type:
+									@start:definition:type:
 											object as Error
-									@end-type
+									@end:definition:type;
 
 									<@tag:invalid-json-file-path;>
 									<@tag:cannot-format-json-file;>
 								]
 							"
 						}
-					@end-trigger-definition
+					@end:definition:trigger;
 				*/
+
+				const fs = require( "fs" );
+				const util = require( "util" );
+
+				const fsAsync = (
+					fs
+					.promises
+				);
+
+				const JSON_FILE_EXTENSION_PATTERN = (
+					/\.json$/
+				);
+
+				const JSON_SPACE_CHARACTER = (
+					"\t"
+				);
+
+				const NEW_LINE_CHARACTER = (
+					"\n"
+				);
+
+				const END_OF_LINE_TOKEN = (
+					"\r\n"
+				)
 
 				try{
 					if(
