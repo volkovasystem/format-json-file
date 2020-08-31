@@ -1,3 +1,4 @@
 .editorconfig
+
 *.module.js
 *.test.js
