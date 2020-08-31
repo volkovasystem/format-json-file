@@ -1,21 +1,24 @@
 {
 	"name": "@volkovasystem/format-json-file",
-	"version": "0.0.8",
+	"alias": "format-json-file",
+	"version": "0.0.9",
 	"description": "Reformat JSON file to use hard tab and double quotes.",
 	"main": "format-json-file.js",
 	"scripts": {
 		"clean": "rm -rfv ./node_modules || true && rm -fv ./package-lock.json || true && npm cache clean --force",
-		"reset": "npm run clean && rm -rfv ./format-json-file.js || true && rm -rfv ./.build || true",
+		"reset": "npm run clean && rm -rfv ./format-json-file.js || true && rm -rfv ./.build || true && rm -rfv ./.test || true",
 		"bundle": "npx parcel build ./*.module.js --no-cache --no-source-maps --no-minify --target node --out-dir ./.build --out-file ./format-json-file.js --global formatJSONFile && mv ./.build/format-json-file.js ./format-json-file.js && rm -rfv ./.build || true",
 		"compress": "npx terser ./format-json-file.js --compress --output ./format-json-file.js",
 		"build": "npm run bundle && npm run compress",
 		"test": "node ./format-json-file.test.js",
 		"stage": "npm run reset && npm install && npm run build && npm test && npm run clean",
 		"prepublishOnly": "npm run stage",
-		"format-json-file": "node ./format-json-file.run.js"
+		"format-json-file": "node ./format-json-file.run.js",
+		"fjf": "node ./format-json-file.run.js"
 	},
 	"bin": {
-		"format-json-file": "format-json-file.run.js"
+		"format-json-file": "format-json-file.run.js",
+		"fjf": "format-json-file.run.js"
 	},
 	"repository": {
 		"type": "git",
