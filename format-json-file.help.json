@@ -47,6 +47,21 @@
 			},
 
 			{
+				"namespace": "linkModule",
+				"alias": "lm",
+				"description": [
+					"Link format-json-file module to global."
+				],
+				"format": [
+					"--linkModule",
+					"--lm"
+				],
+				"sample": [
+					"format-json-file --installModule --linkModule"
+				]
+			},
+
+			{
 				"namespace": "uninstallModule",
 				"alias": "um",
 				"description": [

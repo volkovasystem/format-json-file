@@ -5,6 +5,48 @@
 				"use strict";
 
 				//; @start:code-space:template-engine;
+				//; @start:procedure:resolve-shell-result;
+				const shellResult = (
+					[ ]
+				);
+
+				const resolveShellResult = (
+					function resolveShellResult( result ){
+						if(
+								(
+										typeof
+										shellResult
+									!=	"undefined"
+								)
+						){
+							shellResult
+							.push(
+								(
+									result
+								)
+							);
+						}
+						else{
+							return	(
+										shellResult
+										.reduce(
+											(
+												( sourceResult, targetResult ) => (
+														targetResult
+													||	sourceResult
+												)
+											),
+
+											(
+												false
+											)
+										)
+									);
+						}
+					}
+				);
+				//; @end:procedure:resolve-shell-result;
+
 				//; @start:procedure:check-shell-parameter;
 				const checkShellParameter = (
 					function checkShellParameter( shellParameter, shortShellParameter ){
@@ -191,7 +233,7 @@
 
 				//; @start:procedure:execute-shell-script;
 				const executeShellScript = (
-					async	function executeScript( shellScript ){
+					async	function executeShellScript( shellScript ){
 								shellScript = (
 									Array
 									.from(
@@ -311,8 +353,10 @@
 								);
 
 								try{
-									const executeScriptPromise = (
-										function executeScriptPromise( resolve, reject ){
+									const executeShellScriptPromise = (
+										function executeShellScriptPromise( resolve, reject ){
+											const childProcess = require( "child_process" );
+
 											childProcess
 											.spawn(
 												(
@@ -378,7 +422,7 @@
 														return	(
 																	new	Promise(
 																			(
-																				executeScriptPromise
+																				executeShellScriptPromise
 																			)
 																		)
 																);
@@ -442,8 +486,12 @@
 						)
 					);
 
+					const packageData = (
+						require( "./package.json" )
+					);
+
 					const helpData = (
-						require( "./format-json-file.help.json" )
+						require( `./${ packageData.alias }.help.json` )
 					);
 
 					const helpModuleData = (
@@ -861,63 +909,156 @@
 						)
 				){
 					const packageData = (
-						require( "package.json" )
+						require( "./package.json" )
 					);
 
-					return	(
-									(
+					const installModuleResult = (
+							(
+								await	executeShellScript(
 											(
-												await	executeShellScript(
-															(
-																[
-																	"npm uninstall",
+												(
+													[
+														"npm uninstall",
 
-																	[
-																		`${ packageData.alias }`,
-																		`npm:${ packageData.name }`
-																	]
-																	.join(
-																		(
-																			"@"
-																		)
-																	),
+														`${ packageData.alias }`,
 
-																	"--global"
-																]
-															)
-														)
+														"--global",
+
+														"|| true"
+													]
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm uninstall",
+
+															`${ packageData.name }`,
+
+															"--global",
+
+															"|| true"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm install",
+
+															[
+																`${ packageData.alias }`,
+																`npm:${ packageData.name }`,
+																`${ packageData.version }`
+															]
+															.join(
+																(
+																	"@"
+																)
+															),
+
+															"--global"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm link",
+
+															`${ packageData.name }`,
+
+															"|| true"
+														]
+													)
+												)
 											)
-										===	true
-									)
+										)
+							)
+						===	true
+					);
 
-								&&	(
-											(
-												await	executeShellScript(
-															(
-																[
-																	"npm install",
-
-																	[
-																		`${ packageData.alias }`,
-																		`npm:${ packageData.name }`,
-																		`${ packageData.version }`
-																	]
-																	.join(
-																		(
-																			"@"
-																		)
-																	),
-
-																	"--global"
-																]
-															)
-														)
-											)
-										===	true
-									)
-							);
+					resolveShellResult(
+						(
+							installModuleResult
+						)
+					);
 				}
 				//; @end:procedure:install-module;
+
+				//; @start:procedure:link-module;
+				const LINK_MODULE_SHELL_PARAMETER = (
+					"--linkModule"
+				);
+
+				const LINK_MODULE_SHORT_SHELL_PARAMETER = (
+					"--lm"
+				);
+
+				const linkModuleStatus = (
+					checkShellParameter(
+						(
+							LINK_MODULE_SHELL_PARAMETER
+						),
+
+						(
+							LINK_MODULE_SHORT_SHELL_PARAMETER
+						)
+					)
+				);
+
+				if(
+						(
+								linkModuleStatus
+							===	true
+						)
+				){
+					const packageData = (
+						require( "./package.json" )
+					);
+
+					const linkModuleResult = (
+							(
+								await	executeShellScript(
+											(
+												[
+													"npm link",
+
+													`${ packageData.name }`
+												]
+											)
+										)
+							)
+						===	true
+					);
+
+					resolveShellResult(
+						(
+							linkModuleResult
+						)
+					);
+				}
+				//; @end:procedure:link-module;
 
 				//; @start:procedure:uninstall-module;
 				const UNINSTALL_MODULE_SHELL_PARAMETER = (
@@ -947,34 +1088,52 @@
 						)
 				){
 					const packageData = (
-						require( "package.json" )
+						require( "./package.json" )
+					);
+
+					const uninstallModuleResult = (
+							(
+								await	executeShellScript(
+											(
+												(
+													[
+														"npm uninstall",
+
+														`${ packageData.alias }`,
+
+														"--global",
+
+														"|| true"
+													]
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm uninstall",
+
+															`${ packageData.name }`,
+
+															"--global",
+
+															"|| true"
+														]
+													)
+												)
+											)
+										)
+							)
+						===	true
 					);
 
 					return	(
-									(
-											(
-												await	executeShellScript(
-															(
-																[
-																	"npm uninstall",
-
-																	[
-																		`${ packageData.alias }`,
-																		`npm:${ packageData.name }`
-																	]
-																	.join(
-																		(
-																			"@"
-																		)
-																	),
-
-																	"--global"
-																]
-															)
-														)
-											)
-										===	true
-									)
+								uninstallModuleResult
 							);
 				}
 				//; @end:procedure:uninstall-module;
@@ -1108,24 +1267,46 @@
 					)
 				);
 
-				return	(
-							await	formatJSONFile(
-										(
-											filePath
+				if(
+						(
+								typeof
+								filePath
+							==	"undefined"
+						)
+				){
+					return	(
+								resolveShellResult( )
+							);
+				}
+
+				const formatJSONFileResult = (
+					await	formatJSONFile(
+								(
+									filePath
+								),
+
+								(
+									{
+										"sortProperty": (
+											sortProperty
 										),
 
-										(
-											{
-												"sortProperty": (
-													sortProperty
-												),
-
-												"propertyList": (
-													propertyList
-												)
-											}
+										"propertyList": (
+											propertyList
 										)
-									)
+									}
+								)
+							)
+				);
+
+				resolveShellResult(
+					(
+						formatJSONFileResult
+					)
+				);
+
+				return	(
+							resolveShellResult( )
 						);
 			}
 )(
