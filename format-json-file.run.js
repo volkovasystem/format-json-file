@@ -511,6 +511,7 @@
 									"\u001b[38;5;202m",
 									"\u001b[1m",
 									`\u{25bc} ${ helpModuleData.namespace } | ${ helpModuleData.alias }`,
+									` [${ packageData.version }]`,
 									"\u001b[0m"
 								]
 								.join(
@@ -880,6 +881,51 @@
 							);
 				}
 				//; @end:procedure:help;
+
+				//; @start:procedure:version;
+				const VERSION_SHELL_PARAMETER = (
+					"--version"
+				);
+
+				const VERSION_SHORT_SHELL_PARAMETER = (
+					"--v"
+				);
+
+				const versionStatus = (
+					checkShellParameter(
+						(
+							VERSION_SHELL_PARAMETER
+						),
+
+						(
+							VERSION_SHORT_SHELL_PARAMETER
+						)
+					)
+				);
+
+				if(
+						(
+								versionStatus
+							===	true
+						)
+				){
+					const packageData = (
+						require( "./package.json" )
+					);
+
+					console
+					.log(
+						(
+							packageData
+							.version
+						)
+					);
+
+					return	(
+								true
+							);
+				}
+				//; @end:procedure:version;
 
 				//; @start:procedure:install-module;
 				const INSTALL_MODULE_SHELL_PARAMETER = (

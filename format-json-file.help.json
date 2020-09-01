@@ -16,6 +16,21 @@
 
 		"parameter": [
 			{
+				"namespace": "version",
+				"alias": "v",
+				"description": [
+					"Show module version."
+				],
+				"format": [
+					"--version",
+					"--v"
+				],
+				"sample": [
+					"format-json-file --version"
+				]
+			},
+
+			{
 				"namespace": "help",
 				"alias": "h",
 				"description": [
