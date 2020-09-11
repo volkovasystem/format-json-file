@@ -69,7 +69,7 @@ const formatJSONFile = (
 							@optional;
 						@parameter;
 
-						@parameter:#optionData:sortProperty
+						@parameter:#optionData.sortProperty
 							@type:
 									boolean
 							@type;
@@ -80,7 +80,7 @@ const formatJSONFile = (
 							@optional;
 						@parameter;
 
-						@parameter:#optionData:propertyList
+						@parameter:#optionData.propertyList
 							@type:
 									object:as:Array:of:string
 							@type;
@@ -383,7 +383,7 @@ const formatJSONFile = (
 												"#cannot-format-json-file;",
 
 												"cannot format json file;",
-												"cannot execute format json file;",
+												"cannot execute format json file procedure;",
 
 												"@error-data:",
 												`${ util.inspect( error ) };`

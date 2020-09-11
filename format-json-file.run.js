@@ -32,8 +32,13 @@
 										.reduce(
 											(
 												( sourceResult, targetResult ) => (
-														targetResult
-													||	sourceResult
+														(
+															targetResult
+														)
+
+													||	(
+															sourceResult
+														)
 												)
 											),
 
@@ -1200,7 +1205,7 @@
 							);
 				}
 				//;	@procedure:uninstall-module;
-				//;	@end:code-space:template-engine;
+				//;	@code-space:template-engine;
 
 				const FILE_PATH_SHELL_PARAMETER = (
 					"--filePath"
@@ -1249,16 +1254,14 @@
 						),
 
 						(
-							(
-								shellParameterList
-								.find(
-									(
-										( shellParameter ) => (
-											JSON_FILE_EXTENSION_PATTERN
-											.test(
-												(
-													shellParameter
-												)
+							shellParameterList
+							.find(
+								(
+									( shellParameter ) => (
+										JSON_FILE_EXTENSION_PATTERN
+										.test(
+											(
+												shellParameter
 											)
 										)
 									)
@@ -1342,35 +1345,42 @@
 							);
 				}
 
-				const formatJSONFileResult = (
-					await	formatJSONFile(
-								(
-									filePath
-								),
+				try{
+					const formatJSONFileResult = (
+						await	formatJSONFile(
+									(
+										filePath
+									),
 
-								(
-									{
-										"sortProperty": (
-											sortProperty
-										),
+									(
+										{
+											"sortProperty": (
+												sortProperty
+											),
 
-										"propertyList": (
-											propertyList
-										)
-									}
+											"propertyList": (
+												propertyList
+											)
+										}
+									)
 								)
-							)
-				);
+					);
 
-				resolveShellResult(
-					(
-						formatJSONFileResult
-					)
-				);
+					resolveShellResult(
+						(
+							formatJSONFileResult
+						)
+					);
 
-				return	(
-							resolveShellResult( )
-						);
+					return	(
+								resolveShellResult( )
+							);
+				}
+				catch( error ){
+					return	(
+								false
+							);
+				}
 			}
 )(
 	(
