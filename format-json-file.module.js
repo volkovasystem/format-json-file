@@ -1,27 +1,18 @@
 "use strict";
 
 /*;
-	@license;
-	@start:license:module:
+	@license:module:
 		MIT License
 
 		Copyright (c) 2020-present Richeve S. Bebedor <richeve.bebedor@gmail.com>
 
-		@start:license:copyright:
+		@license:copyright:
 			Richeve S. Bebedor
 
-			<
-				@start:license:year-range:
-					2020-present
-				@end:license:year-range;
-			>
+			<@license:year-range:2020-present;>
 
-			<
-				@start:license:contact-detail:
-					richeve.bebedor@gmail.com
-				@end:license:contact-detail;
-			>
-		@end:license:copyright;
+			<@license:contact-detail:richeve.bebedor@gmail.com;>
+		@license:copyright;
 
 		Permission is hereby granted, free of charge, to any person obtaining a copy
 		of this software and associated documentation files (the "Software"), to deal
@@ -40,82 +31,87 @@
 		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 		SOFTWARE.
-	@end:license:module;
+	@license:module;
 */
 
 const formatJSONFile = (
-	async	function formatJSONFile( filePath, option ){
+	async	function formatJSONFile( filePath, optionData ){
 				/*;
-					@start:definition:procedure:
-						Reformat JSON file to use hard tab and double quotes.
-					@end:definition:procedure;
+					@definition:
+						@procedure:#formatJSONFile
+							@description:
+								Reformat JSON file to use hard tab and double quotes.
+							@description;
+						@procedure;
 
-					@start:definition:parameter:
-						{
-							"filePath": "
-								[
-									@start:definition:type:
-											string
-									@end:definition:type;
+						@parameter:#filePath
+							@type:
+									string
+							@type;
 
-									<@required;>
-								]
-							",
+							@description:
+							@description;
 
-							"option": "
-								[
-									@start:definition:type:
-											object with {
-												"sortProperty": "
-													[
-														@start:definition:type:
-																boolean
-														@end:definition:type;
-													]
-												",
+							@required;
+						@parameter;
 
-												"propertyList": "
-													[
-														@start:definition:type:
-																object as Array
-														@end:definition:type;
-													]
-												"
-											}
-									@end:definition:type;
+						@parameter:#optionData
+							@type:
+									object:with:[
+										sortProperty,
+										propertyList
+									]
+							@type;
 
-									<@optional;>
-								]
-							"
-						}
-					@end:definition:parameter;
+							@description:
+							@description;
 
-					@start:definition:result:
-						{
-							"result": "
-								[
-									@start:definition:type:
-											boolean
-									@end:definition:type;
-								]
-							"
-						}
-					@end:definition:result;
+							@optional;
+						@parameter;
 
-					@start:definition:trigger:
-						{
-							"trigger": "
-								[
-									@start:definition:type:
-											object as Error
-									@end:definition:type;
+						@parameter:#optionData:sortProperty
+							@type:
+									boolean
+							@type;
 
-									<@tag:invalid-json-file-path;>
-									<@tag:cannot-format-json-file;>
-								]
-							"
-						}
-					@end:definition:trigger;
+							@description:
+							@description;
+
+							@optional;
+						@parameter;
+
+						@parameter:#optionData:propertyList
+							@type:
+									object:as:Array:of:string
+							@type;
+
+							@description:
+							@description;
+
+							@optional;
+						@parameter;
+
+						@result:#result
+							@type:
+									boolean
+							@type;
+
+							@description:
+							@description;
+						@result;
+
+						@trigger:#trigger
+							@type:
+									object:as:Error
+							@type;
+
+							@description:
+							@description;
+
+							@tag:#invalid-json-file-path;
+							@tag:#cannot-format-json-file;
+						@trigger;
+					@definition;
 				*/
 
 				const fs = require( "fs" );
@@ -179,13 +175,16 @@ const formatJSONFile = (
 								===	true
 							)
 					){
-						option = (
-								(
-									option
-								)
+						(
+								optionData
+							=	(
+										(
+											optionData
+										)
 
-							||	(
-									{ }
+									||	(
+											{ }
+										)
 								)
 						);
 
@@ -210,7 +209,7 @@ const formatJSONFile = (
 						const JSONFormattedData = (
 								(
 										(
-												option
+												optionData
 												.sortProperty
 											===	true
 										)
@@ -221,7 +220,7 @@ const formatJSONFile = (
 														Array
 														.isArray(
 															(
-																option
+																optionData
 																.propertyList
 															)
 														)
@@ -230,7 +229,7 @@ const formatJSONFile = (
 
 											&&	(
 														(
-															option
+															optionData
 															.propertyList
 														)
 														.length
@@ -238,7 +237,7 @@ const formatJSONFile = (
 												)
 										)
 									?	(
-											option
+											optionData
 											.propertyList
 											.reduce(
 												function( data, property ){
@@ -251,10 +250,12 @@ const formatJSONFile = (
 																===	true
 															)
 													){
-															data[ property ]
-														=	(
-																JSONData[ property ]
-															);
+														(
+																data[ property ]
+															=	(
+																	JSONData[ property ]
+																)
+														);
 													}
 
 													return	(
@@ -286,10 +287,12 @@ const formatJSONFile = (
 																===	true
 															)
 													){
-															data[ property ]
-														=	(
-																JSONData[ property ]
-															);
+														(
+																data[ property ]
+															=	(
+																	JSONData[ property ]
+																)
+														);
 													}
 
 													return	(

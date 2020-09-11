@@ -4,8 +4,8 @@
 	async	function runFormatJSONFile( shellParameterList ){
 				"use strict";
 
-				//; @start:code-space:template-engine;
-				//; @start:procedure:resolve-shell-result;
+				//;	@code-space:template-engine:
+				//;	@procedure:resolve-shell-result:
 				const shellResult = (
 					[ ]
 				);
@@ -45,9 +45,9 @@
 						}
 					}
 				);
-				//; @end:procedure:resolve-shell-result;
+				//;	@procedure:resolve-shell-result;
 
-				//; @start:procedure:check-shell-parameter;
+				//;	@procedure:check-shell-parameter:
 				const checkShellParameter = (
 					function checkShellParameter( shellParameter, shortShellParameter ){
 						return	(
@@ -80,9 +80,9 @@
 								);
 					}
 				);
-				//; @end:procedure:check-shell-parameter;
+				//;	@procedure:check-shell-parameter;
 
-				//; @start:procedure:get-shell-parameter-value;
+				//;	@procedure:get-shell-parameter-value:
 				const getShellParameterValue = (
 					function getShellParameterValue( shellParameter, shortShellParameter ){
 						if(
@@ -141,9 +141,9 @@
 						}
 					}
 				);
-				//; @end:procedure:get-shell-parameter-value;
+				//;	@procedure:get-shell-parameter-value;
 
-				//; @start:procedure:resolve-shell-parameter-value;
+				//;	@procedure:resolve-shell-parameter-value:
 				const resolveShellParameterValue = (
 					function resolveShellParameterValue( shellParameter, shortShellParameter, defaultValue ){
 						const shellParameterValue = (
@@ -229,127 +229,130 @@
 								);
 					}
 				);
-				//; @end:procedure:resolve-shell-parameter-value;
+				//;	@procedure:resolve-shell-parameter-value;
 
-				//; @start:procedure:execute-shell-script;
+				//;	@procedure:execute-shell-script:
 				const executeShellScript = (
 					async	function executeShellScript( shellScript ){
-								shellScript = (
-									Array
-									.from(
-										(
-											arguments
-										)
-									)
-									.reduce(
-										(
-											( shellScriptPhraseList, parameter ) => {
-												if(
-														(
-																Array
-																.isArray(
-																	(
-																		parameter
-																	)
-																)
-															===	true
-														)
-
-													&&	(
-																parameter
-																.length
-															>	0
-														)
-
-													&&	(
-																parameter
-																.every(
-																	(
-																		( shellScriptPhrase ) => (
-																				(
-																						typeof
-																						shellScriptPhrase
-																					==	"string"
-																				)
-
-																			&&	(
-																						shellScriptPhrase
-																						.length
-																					>	0
-																				)
+								(
+										shellScript
+									=	(
+											Array
+											.from(
+												(
+													arguments
+												)
+											)
+											.reduce(
+												(
+													( shellScriptPhraseList, parameter ) => {
+														if(
+																(
+																		Array
+																		.isArray(
+																			(
+																				parameter
+																			)
 																		)
-																	)
+																	===	true
 																)
-															===	true
-														)
-												){
-													parameter
-													.forEach(
-														(
-															( shellScriptPhrase ) => {
-																shellScriptPhraseList
-																.push(
-																	(
-																		shellScriptPhrase
-																	)
-																);
-															}
-														)
-													);
-												}
-												else if(
-														(
-																typeof
-																parameter
-															==	"string"
-														)
 
-													&&	(
-																parameter
-																.length
-															>	0
-														)
-												){
-													shellScriptPhraseList
-													.push(
-														(
+															&&	(
+																		parameter
+																		.length
+																	>	0
+																)
+
+															&&	(
+																		parameter
+																		.every(
+																			(
+																				( shellScriptPhrase ) => (
+																						(
+																								typeof
+																								shellScriptPhrase
+																							==	"string"
+																						)
+
+																					&&	(
+																								shellScriptPhrase
+																								.length
+																							>	0
+																						)
+																				)
+																			)
+																		)
+																	===	true
+																)
+														){
 															parameter
-														)
-													);
-												}
+															.forEach(
+																(
+																	( shellScriptPhrase ) => {
+																		shellScriptPhraseList
+																		.push(
+																			(
+																				shellScriptPhrase
+																			)
+																		);
+																	}
+																)
+															);
+														}
+														else if(
+																(
+																		typeof
+																		parameter
+																	==	"string"
+																)
 
-												return	(
+															&&	(
+																		parameter
+																		.length
+																	>	0
+																)
+														){
 															shellScriptPhraseList
-														);
-											}
-										),
+															.push(
+																(
+																	parameter
+																)
+															);
+														}
 
-										(
-											[ ]
-										)
-									)
-									.filter(
-										(
-											( shellScriptPhrase ) => (
-													(
-															typeof
-															shellScriptPhrase
-														==	"string"
-													)
+														return	(
+																	shellScriptPhraseList
+																);
+													}
+												),
 
-												&&	(
-															shellScriptPhrase
-															.length
-														>	0
+												(
+													[ ]
+												)
+											)
+											.filter(
+												(
+													( shellScriptPhrase ) => (
+															(
+																	typeof
+																	shellScriptPhrase
+																==	"string"
+															)
+
+														&&	(
+																	shellScriptPhrase
+																	.length
+																>	0
+															)
 													)
+												)
+											)
+											.join(
+												(
+													" "
+												)
 											)
 										)
-									)
-									.join(
-										(
-											" "
-										)
-									)
 								);
 
 								try{
@@ -441,9 +444,9 @@
 								}
 							}
 				);
-				//; @end:procedure:execute-shell-script;
+				//;	@procedure:execute-shell-script;
 
-				//; @start:procedure:help;
+				//;	@procedure:help:
 				const HELP_SHELL_PARAMETER = (
 					"--help"
 				);
@@ -490,13 +493,27 @@
 						require( "./package.json" )
 					);
 
-					const helpData = (
-						require( `./${ packageData.alias }.help.json` )
+					const definitionData = (
+						require( `./definition.json` )
 					);
 
-					const helpModuleData = (
-						helpData
+					const moduleData = (
+						definitionData
 						.module
+						.find(
+							(
+								( moduleData ) => (
+										moduleData
+										.type
+										.includes(
+											(
+												"shell"
+											)
+										)
+									===	true
+								)
+							)
+						)
 					);
 
 					const helpModuleTemplate = (
@@ -510,7 +527,7 @@
 								[
 									"\u001b[38;5;202m",
 									"\u001b[1m",
-									`\u{25bc} ${ helpModuleData.namespace } | ${ helpModuleData.alias }`,
+									`\u{25bc} ${ moduleData.namespace } | ${ moduleData.alias }`,
 									` [${ packageData.version }]`,
 									"\u001b[0m"
 								]
@@ -523,7 +540,7 @@
 						)
 						.concat(
 							(
-								helpModuleData
+								moduleData
 								.description
 								.map(
 									(
@@ -548,7 +565,7 @@
 						)
 						.concat(
 							(
-								helpModuleData
+								moduleData
 								.format
 								.map(
 									(
@@ -573,7 +590,7 @@
 						)
 						.concat(
 							(
-								helpModuleData
+								moduleData
 								.sample
 								.map(
 									(
@@ -606,7 +623,7 @@
 							)
 							.concat(
 								(
-									helpModuleData
+									moduleData
 									.parameter
 									.filter(
 										(
@@ -756,7 +773,7 @@
 							)
 							.concat(
 								(
-									helpModuleData
+									moduleData
 									.parameter
 									.map(
 										(
@@ -880,9 +897,9 @@
 								true
 							);
 				}
-				//; @end:procedure:help;
+				//;	@procedure:help;
 
-				//; @start:procedure:version;
+				//;	@procedure:version:
 				const VERSION_SHELL_PARAMETER = (
 					"--version"
 				);
@@ -925,9 +942,9 @@
 								true
 							);
 				}
-				//; @end:procedure:version;
+				//;	@procedure:version;
 
-				//; @start:procedure:install-module;
+				//;	@procedure:install-module:
 				const INSTALL_MODULE_SHELL_PARAMETER = (
 					"--installModule"
 				);
@@ -1050,9 +1067,9 @@
 						)
 					);
 				}
-				//; @end:procedure:install-module;
+				//;	@procedure:install-module;
 
-				//; @start:procedure:link-module;
+				//;	@procedure:link-module:
 				const LINK_MODULE_SHELL_PARAMETER = (
 					"--linkModule"
 				);
@@ -1104,9 +1121,9 @@
 						)
 					);
 				}
-				//; @end:procedure:link-module;
+				//;	@procedure:link-module;
 
-				//; @start:procedure:uninstall-module;
+				//;	@procedure:uninstall-module:
 				const UNINSTALL_MODULE_SHELL_PARAMETER = (
 					"--uninstallModule"
 				);
@@ -1182,7 +1199,7 @@
 								uninstallModuleResult
 							);
 				}
-				//; @end:procedure:uninstall-module;
+				//;	@procedure:uninstall-module;
 				//;	@end:code-space:template-engine;
 
 				const FILE_PATH_SHELL_PARAMETER = (

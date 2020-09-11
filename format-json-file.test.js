@@ -1,6 +1,6 @@
 "use strict";
 
-//; @start:code-space:template-engine;
+//;	@code-space:template-engine:
 const assert = require( "assert" );
 const util = require( "util" );
 
@@ -9,7 +9,7 @@ const strictAssert = (
 	.strict
 );
 
-//; @start:procedure:check-directory;
+//;	@procedure:check-directory:
 const checkDirectory = (
 	async	function checkDirectory( directoryPath ){
 					const fs = require( "fs" );
@@ -20,15 +20,17 @@ const checkDirectory = (
 						.promises
 					);
 
-						directoryPath
-					=	(
-							path
-							.resolve(
-								(
-									directoryPath
+					(
+							directoryPath
+						=	(
+								path
+								.resolve(
+									(
+										directoryPath
+									)
 								)
 							)
-						);
+					);
 
 					try{
 						return	(
@@ -50,9 +52,9 @@ const checkDirectory = (
 					}
 			}
 );
-//; @end:procedure:check-directory;
+//;	@procedure:check-directory;
 
-//; @start:procedure:check-file;
+//;	@procedure:check-file:
 const checkFile = (
 	async	function checkFile( filePath ){
 					const fs = require( "fs" );
@@ -63,15 +65,17 @@ const checkFile = (
 						.promises
 					);
 
-						filePath
-					=	(
-							path
-							.resolve(
-								(
-									filePath
+					(
+							filePath
+						=	(
+								path
+								.resolve(
+									(
+										filePath
+									)
 								)
 							)
-						);
+					);
 
 					try{
 						return	(
@@ -93,9 +97,9 @@ const checkFile = (
 					}
 			}
 );
-//; @end:procedure:check-file;
+//;	@procedure:check-file;
 
-//;	@start:procedure:get-directory-file-list;
+//;	@procedure:get-directory-file-list:
 const getDirectoryFileList = (
 	async	function getDirectoryFileList( directoryPath ){
 				const fs = require( "fs" );
@@ -106,15 +110,17 @@ const getDirectoryFileList = (
 					.promises
 				);
 
-					directoryPath
-				=	(
-						path
-						.resolve(
-							(
-								directoryPath
+				(
+						directoryPath
+					=	(
+							path
+							.resolve(
+								(
+									directoryPath
+								)
 							)
 						)
-					);
+				);
 
 				try{
 					return	(
@@ -141,9 +147,9 @@ const getDirectoryFileList = (
 				}
 			}
 );
-//; @end:procedure:get-directory-file-list;
+//;	@procedure:get-directory-file-list;
 
-//;	@start:procedure:execute-shell-script;
+//;	@procedure:execute-shell-script:
 const executeShellScript = (
 	async	function executeShellScript( shellScript, moduleDirectoryPath ){
 				const childProcess = require( "child_process" );
@@ -172,19 +178,25 @@ const executeShellScript = (
 							>	0
 						)
 				){
-					moduleDirectoryPath = (
-						path
-						.resolve(
-							(
-								moduleDirectoryPath
+					(
+							moduleDirectoryPath
+						=	(
+								path
+								.resolve(
+									(
+										moduleDirectoryPath
+									)
+								)
 							)
-						)
 					);
 				}
 				else{
-					moduleDirectoryPath = (
-						process
-						.cwd( )
+					(
+							moduleDirectoryPath
+						=	(
+								process
+								.cwd( )
+							)
 					);
 				}
 
@@ -239,9 +251,9 @@ const executeShellScript = (
 				}
 			}
 );
-//;	@end:procedure:execute-shell-script;
+//;	@procedure:execute-shell-script;
 
-//;	@start:procedure:setup-test-directory;
+//;	@procedure:setup-test-directory:
 const SETUP_TEST_DIRECTORY = (
 	async	function SETUP_TEST_DIRECTORY( ){
 				const shellParameterList = (
@@ -299,9 +311,9 @@ const SETUP_TEST_DIRECTORY = (
 						);
 			}
 );
-//;	@end:procedure:setup-test-directory;
+//;	@procedure:setup-test-directory;
 
-//;	@start:procedure:clean-test-directory;
+//;	@procedure:clean-test-directory:
 const CLEAN_TEST_DIRECTORY = (
 	async	function CLEAN_TEST_DIRECTORY( ){
 				const shellParameterList = (
@@ -359,8 +371,8 @@ const CLEAN_TEST_DIRECTORY = (
 						);
 			}
 );
-//;	@end:procedure:clean-test-directory;
-//; @end:code-space:template-engine;
+//;	@procedure:clean-test-directory;
+//;	@code-space:template-engine;
 
 const formatJSONFile = (
 	require( "./format-json-file.js" )
