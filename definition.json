@@ -6,6 +6,7 @@
 				"Reformat JSON file to use hard tab and double quotes."
 			],
 			"namespace": "format-json-file",
+			"alias": "",
 			"property": [
 				"formatJSONFile"
 			],
@@ -26,6 +27,7 @@
 						"Set the file path to JSON file."
 					],
 					"namespace": "file-path",
+					"alias": "",
 					"property": [
 						"filePath"
 					],
@@ -47,6 +49,7 @@
 						"Extended parameter for this procedure."
 					],
 					"namespace": "option-data",
+					"alias": "",
 					"property": [
 						"optionData"
 					],
@@ -67,9 +70,10 @@
 					"description": [
 						"Enable default package property sorting procedure."
 					],
-					"namespace": "sort-property",
+					"namespace": "option-data:sort-property",
+					"alias": "",
 					"property": [
-						"sortProperty"
+						"optionData.sortProperty"
 					],
 					"type": [
 						"boolean"
@@ -88,9 +92,10 @@
 					"description": [
 						"Override default package property sorting procedure."
 					],
-					"namespace": "property-list",
+					"namespace": "option-data:property-list",
+					"alias": "",
 					"property": [
-						"propertyList"
+						"optionData.propertyList"
 					],
 					"type": [
 						"object:as:Array:of:string"
@@ -102,6 +107,48 @@
 						"await formatJSONFile( './package.json', { 'sortProperty': true, 'propertyList': [ 'name', 'version', 'description' ] } );"
 					],
 					"optional": true
+				}
+			],
+
+			"result": [
+				{
+					"title": "Result",
+					"description": [
+						"Result of format JSON file procedure."
+					],
+					"namespace": "result",
+					"alias": "",
+					"property": [
+						"result"
+					],
+					"type": [
+						"boolean"
+					],
+					"format": [ ],
+					"sample": [ ],
+				}
+			],
+
+			"trigger": [
+				{
+					"title": "Trigger",
+					"description": [
+						"Trigger of format JSON file procedure."
+					],
+					"namespace": "trigger",
+					"alias": "",
+					"property": [
+						"trigger"
+					],
+					"type": [
+						"object:as:Error"
+					],
+					"format": [ ],
+					"sample": [ ],
+					"tag": [
+						"invalid-json-file-path",
+						"cannot-format-json-file"
+					]
 				}
 			]
 		},
