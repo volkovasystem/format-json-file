@@ -5,6 +5,7 @@
 			"description": [
 				"Reformat JSON file to use hard tab and double quotes."
 			],
+
 			"namespace": "format-json-file",
 			"alias": "",
 			"property": [
@@ -13,6 +14,7 @@
 			"type": [
 				"procedure"
 			],
+
 			"format": [
 				"formatJSONFile( filePath, optionData );"
 			],
@@ -24,8 +26,9 @@
 				{
 					"title": "File Path",
 					"description": [
-						"Set the file path to JSON file."
+						"Set file path to JSON file."
 					],
+
 					"namespace": "file-path",
 					"alias": "",
 					"property": [
@@ -34,42 +37,49 @@
 					"type": [
 						"string"
 					],
+
 					"format": [
 						"formatJSONFile( filePath );"
 					],
 					"sample": [
 						"await formatJSONFile( './package.json' );"
 					],
+
 					"required": true
 				},
 
 				{
 					"title": "Option Data",
 					"description": [
-						"Extended parameter for this procedure."
+						"Extended procedure parameter."
 					],
+
 					"namespace": "option-data",
 					"alias": "",
 					"property": [
 						"optionData"
 					],
 					"type": [
-						"object:with:[sortProperty,propertyList]"
+						"object:with:[sortProperty]",
+						"object:with:[propertyList]"
 					],
+
 					"format": [
 						"formatJSONFile( filePath, optionData );"
 					],
 					"sample": [
 						"await formatJSONFile( './package.json', { 'sortProperty': true } );"
 					],
+
 					"optional": true
 				},
 
 				{
 					"title": "Sort Property",
 					"description": [
-						"Enable default package property sorting procedure."
+						"Enable default package property sort procedure."
 					],
+
 					"namespace": "option-data:sort-property",
 					"alias": "",
 					"property": [
@@ -78,20 +88,23 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"formatJSONFile( filePath, { 'sortProperty': true } );"
 					],
 					"sample": [
 						"await formatJSONFile( './package.json', { 'sortProperty': true } );"
 					],
+
 					"optional": true
 				},
 
 				{
 					"title": "Property List",
 					"description": [
-						"Override default package property sorting procedure."
+						"Override default package property sort procedure."
 					],
+
 					"namespace": "option-data:property-list",
 					"alias": "",
 					"property": [
@@ -100,12 +113,14 @@
 					"type": [
 						"object:as:Array:of:string"
 					],
+
 					"format": [
 						"formatJSONFile( filePath, { 'sortProperty': true, 'propertyList': [ ] } );"
 					],
 					"sample": [
-						"await formatJSONFile( './package.json', { 'sortProperty': true, 'propertyList': [ 'name', 'version', 'description' ] } );"
+						"await formatJSONFile( './package.json', { 'sortProperty': true, 'propertyList': [ 'name', 'alias', 'version' ] } );"
 					],
+
 					"optional": true
 				}
 			],
@@ -116,6 +131,7 @@
 					"description": [
 						"Result of format JSON file procedure."
 					],
+
 					"namespace": "result",
 					"alias": "",
 					"property": [
@@ -124,8 +140,13 @@
 					"type": [
 						"boolean"
 					],
-					"format": [ ],
-					"sample": [ ]
+
+					"format": [
+						""
+					],
+					"sample": [
+						""
+					]
 				}
 			],
 
@@ -135,6 +156,7 @@
 					"description": [
 						"Trigger of format JSON file procedure."
 					],
+
 					"namespace": "trigger",
 					"alias": "",
 					"property": [
@@ -143,8 +165,14 @@
 					"type": [
 						"object:as:Error"
 					],
-					"format": [ ],
-					"sample": [ ],
+
+					"format": [
+						""
+					],
+					"sample": [
+						""
+					],
+
 					"tag": [
 						"invalid-json-file-path",
 						"cannot-format-json-file"
@@ -157,11 +185,13 @@
 			"description": [
 				"Reformat JSON file to use hard tab and double quotes."
 			],
+
 			"namespace": "format-json-file",
 			"alias": "fjf",
 			"type": [
 				"shell"
 			],
+
 			"format": [
 				"format-json-file <filePath>",
 				"format-json-file --filePath <filePath>"
@@ -177,6 +207,7 @@
 					"description": [
 						"Show module version."
 					],
+
 					"namespace": "version",
 					"alias": "v",
 					"property": [
@@ -185,6 +216,7 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"--version",
 						"--v"
@@ -199,6 +231,7 @@
 					"description": [
 						"Show help module."
 					],
+
 					"namespace": "help",
 					"alias": "h",
 					"property": [
@@ -209,6 +242,7 @@
 						"boolean",
 						"string"
 					],
+
 					"format": [
 						"--help [helpShellParameter]",
 						"--h [helpShellParameter]"
@@ -222,8 +256,9 @@
 				{
 					"title": "Install Module",
 					"description": [
-						"Install format-json-file module to global."
+						"Install module to global."
 					],
+
 					"namespace": "installModule",
 					"alias": "im",
 					"property": [
@@ -232,6 +267,7 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"--installModule",
 						"--im"
@@ -244,8 +280,9 @@
 				{
 					"title": "Link Module",
 					"description": [
-						"Link format-json-file module to global."
+						"Link module to global."
 					],
+
 					"namespace": "linkModule",
 					"alias": "lm",
 					"property": [
@@ -254,6 +291,7 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"--linkModule",
 						"--lm"
@@ -266,8 +304,9 @@
 				{
 					"title": "Uninstall Module",
 					"description": [
-						"Uninstall format-json-file module from global."
+						"Uninstall module from global."
 					],
+
 					"namespace": "uninstallModule",
 					"alias": "um",
 					"property": [
@@ -276,6 +315,7 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"--uninstallModule",
 						"--um"
@@ -288,8 +328,9 @@
 				{
 					"title": "File Path",
 					"description": [
-						"Set the file path to JSON file."
+						"Set file path to JSON file."
 					],
+
 					"namespace": "filePath",
 					"alias": "fp",
 					"property": [
@@ -298,6 +339,7 @@
 					"type": [
 						"string"
 					],
+
 					"format": [
 						"--filePath <filePath>",
 						"--fp <filePath>"
@@ -310,8 +352,9 @@
 				{
 					"title": "Sort Property",
 					"description": [
-						"Enable default package property sorting procedure."
+						"Enable default package property sort procedure."
 					],
+
 					"namespace": "sortProperty",
 					"alias": "sp",
 					"property": [
@@ -320,6 +363,7 @@
 					"type": [
 						"boolean"
 					],
+
 					"format": [
 						"--sortProperty",
 						"--sp"
@@ -332,8 +376,9 @@
 				{
 					"title": "Property List",
 					"description": [
-						"Override default package property sorting procedure."
+						"Override default package property sort procedure."
 					],
+
 					"namespace": "propertyList",
 					"alias": "pl",
 					"property": [
@@ -342,12 +387,13 @@
 					"type": [
 						"object:as:Array:of:string"
 					],
+
 					"format": [
 						"--propertyList <propertyList>",
 						"--pl <propertyList>"
 					],
 					"sample": [
-						"format-json-file --filePath package.json --sortProperty --propertyList name,version,description"
+						"format-json-file --filePath package.json --sortProperty --propertyList name,alias,version"
 					]
 				}
 			]
