@@ -1052,11 +1052,9 @@
 												.concat(
 													(
 														[
-															"npm link",
+															"npm list --global --depth 0",
 
-															`${ packageData.name }`,
-
-															"|| true"
+															`${ packageData.alias }`
 														]
 													)
 												)
@@ -1066,11 +1064,9 @@
 						===	true
 					);
 
-					resolveShellResult(
-						(
-							installModuleResult
-						)
-					);
+					return	(
+								installModuleResult
+							);
 				}
 				//;	@procedure:install-module;
 
@@ -1112,7 +1108,9 @@
 												[
 													"npm link",
 
-													`${ packageData.name }`
+													`${ packageData.alias }`,
+
+													"|| true"
 												]
 											)
 										)
@@ -1120,11 +1118,9 @@
 						===	true
 					);
 
-					resolveShellResult(
-						(
-							linkModuleResult
-						)
-					);
+					return	(
+								linkModuleResult
+							);
 				}
 				//;	@procedure:link-module;
 

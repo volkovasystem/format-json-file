@@ -297,7 +297,7 @@
 						"--lm"
 					],
 					"sample": [
-						"format-json-file --installModule --linkModule"
+						"format-json-file --linkModule"
 					]
 				},
 
