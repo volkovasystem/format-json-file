@@ -1052,6 +1052,56 @@
 												.concat(
 													(
 														[
+															"cd",
+
+															`$(npm config get prefix)/lib`
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm link",
+
+															`${ packageData.alias }`,
+
+															"2>/dev/null",
+
+															"|| true"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"cd -"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
 															"npm list --global --depth 0",
 
 															`${ packageData.alias }`
