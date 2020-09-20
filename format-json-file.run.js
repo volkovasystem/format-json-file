@@ -1070,7 +1070,7 @@
 														[
 															"npm link",
 
-															`${ packageData.alias }`,
+															`${ packageData.name }`,
 
 															"2>/dev/null",
 
@@ -1155,13 +1155,63 @@
 							(
 								await	executeShellScript(
 											(
-												[
-													"npm link",
+												(
+													[
+														"cd",
 
-													`${ packageData.alias }`,
+														`$(npm config get prefix)/lib`
+													]
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm link",
 
-													"|| true"
-												]
+															`${ packageData.name }`,
+
+															"2>/dev/null",
+
+															"|| true"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"cd -"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"&&"
+														]
+													)
+												)
+												.concat(
+													(
+														[
+															"npm list --global --depth 0",
+
+															`${ packageData.alias }`
+														]
+													)
+												)
 											)
 										)
 							)
