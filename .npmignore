@@ -1,4 +1,4 @@
-.editorconfig
+*
 
-*.module.js
-*.test.js
+!format-json-file.js
+!format-json-file.run.js
