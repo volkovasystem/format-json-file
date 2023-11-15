@@ -21,6 +21,8 @@ export MODULE_ORGANIZATION="volkovasystem";
 export MODULE_NAMESPACE_VALUE="format-json-file";
 export MODULE_NAMESPACE_VARIABLE="formatJSONFile";
 
+export MODULE_BUILD_TARGET_LIST="node";
+
 export TRASH_DIRECTORY=$(mktemp -d);
 
 return 0;

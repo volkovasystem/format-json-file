@@ -12,6 +12,11 @@ const BUNDLE_WEBPACK_SETTING = (
 			"production"
 		),
 
+		"target": (
+			`${ process.env.MODULE_BUILD_TARGET_LIST }`
+			.split( /\s*\,\s*/g )
+		),
+
 		"output": (
 			{
 				"filename": (
