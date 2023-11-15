@@ -45,5 +45,8 @@
 	"bugs": {
 		"url": "https://github.com/volkovasystem/format-json-file/issues"
 	},
-	"homepage": "https://github.com/volkovasystem/format-json-file#readme"
+	"homepage": "https://github.com/volkovasystem/format-json-file#readme",
+	"dependencies": {
+		"@volkovasystem/parse-shell-parameter": "0.0.1"
+	}
 }
