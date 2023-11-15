@@ -1,15 +1,15 @@
 "use strict";
 
-/*;
+/*;!
 	@license:module:
 		MIT License
 
-		Copyright (c) 2020-present Richeve S. Bebedor <richeve.bebedor@gmail.com>
+		Copyright (c) 2023-present Richeve S. Bebedor <richeve.bebedor@gmail.com>
 
 		@license:copyright:
 			Richeve S. Bebedor
 
-			<@license:year-range:2020-present;>
+			<@license:year-range:2023-present;>
 
 			<@license:contact-detail:richeve.bebedor@gmail.com;>
 		@license:copyright;
@@ -35,16 +35,16 @@
 */
 
 const formatJSONFile = (
-	async	function formatJSONFile( filePath, optionData ){
+	async	function formatJSONFile( filePath, option ){
 				/*;
 					@definition:
-						@procedure:#formatJSONFile
+						@procedure: #formatJSONFile
 							@description:
-								Reformat JSON file to use hard tab and double quotes.
+								Reformat JSON file to use hard tab and double quote.
 							@description;
 						@procedure;
 
-						@parameter:#filePath
+						@parameter: #filePath
 							@type:
 									string
 							@type;
@@ -55,10 +55,10 @@ const formatJSONFile = (
 							@required;
 						@parameter;
 
-						@parameter:#optionData
+						@parameter: #option
 							@type:
 									object:with:[
-										sortProperty,
+										sortPropertyStatus,
 										propertyList
 									]
 							@type;
@@ -69,7 +69,7 @@ const formatJSONFile = (
 							@optional;
 						@parameter;
 
-						@parameter:#optionData.sortProperty
+						@parameter: #option.sortPropertyStatus
 							@type:
 									boolean
 							@type;
@@ -80,7 +80,7 @@ const formatJSONFile = (
 							@optional;
 						@parameter;
 
-						@parameter:#optionData.propertyList
+						@parameter: #option.propertyList
 							@type:
 									object:as:Array:of:string
 							@type;
@@ -91,7 +91,7 @@ const formatJSONFile = (
 							@optional;
 						@parameter;
 
-						@result:#result
+						@result: #result
 							@type:
 									boolean
 							@type;
@@ -100,16 +100,28 @@ const formatJSONFile = (
 							@description;
 						@result;
 
-						@trigger:#trigger
+						@trigger: #trigger
 							@type:
 									object:as:Error
 							@type;
 
+							@tag: #invalid-json-file-path;
+
 							@description:
 							@description;
 
-							@tag:#invalid-json-file-path;
-							@tag:#cannot-format-json-file;
+							@tag: #cannot-format-json-file;
+						@trigger;
+
+						@trigger: #trigger
+							@type:
+									object:as:Error
+							@type;
+
+							@tag: #cannot-format-json-file;
+
+							@description:
+							@description;
 						@trigger;
 					@definition;
 				*/
@@ -176,10 +188,10 @@ const formatJSONFile = (
 							)
 					){
 						(
-								optionData
+								option
 							=	(
 										(
-											optionData
+											option
 										)
 
 									||	(
@@ -209,8 +221,8 @@ const formatJSONFile = (
 						const JSONFormattedData = (
 								(
 										(
-												optionData
-												.sortProperty
+												option
+												.sortPropertyStatus
 											===	true
 										)
 								)
@@ -220,7 +232,7 @@ const formatJSONFile = (
 														Array
 														.isArray(
 															(
-																optionData
+																option
 																.propertyList
 															)
 														)
@@ -229,7 +241,7 @@ const formatJSONFile = (
 
 											&&	(
 														(
-															optionData
+															option
 															.propertyList
 														)
 														.length
@@ -237,7 +249,7 @@ const formatJSONFile = (
 												)
 										)
 									?	(
-											optionData
+											option
 											.propertyList
 											.reduce(
 												function( data, property ){
@@ -346,7 +358,8 @@ const formatJSONFile = (
 														)
 													)
 												)
-											+	(
+											+
+												(
 													END_OF_LINE_TOKEN
 												)
 										)
@@ -368,7 +381,10 @@ const formatJSONFile = (
 													"invalid json file path;",
 
 													"@file-path:",
-													`${ filePath };`
+													`${ util.inspect( filePath ) };`,
+
+													"@option-data:",
+													`${ util.inspect( option ) };`,
 												]
 											)
 										)
@@ -385,8 +401,14 @@ const formatJSONFile = (
 												"cannot format json file;",
 												"cannot execute format json file procedure;",
 
+												"@file-path:",
+												`${ util.inspect( filePath ) };`,
+
+												"@option-data:",
+												`${ util.inspect( option ) };`,
+
 												"@error-data:",
-												`${ util.inspect( error ) };`
+												`${ util.inspect( error ) };`,
 											]
 										)
 									)
@@ -395,4 +417,10 @@ const formatJSONFile = (
 			}
 );
 
-module.exports = formatJSONFile;
+(
+		module
+		.exports
+	=	(
+			formatJSONFile
+		)
+);
