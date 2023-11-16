@@ -4,6 +4,14 @@ npm run clean-module;
 
 npx --yes --ignore-existing @volkovasystem/format-package-json-file;
 
+[[ $HARD_RESET_STATUS = true ]] &&						\
+[[ -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
+mv --force "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" "$TRASH_DIRECTORY";
+
+[[ $HARD_RESET_STATUS = true ]] &&						\
+[[ -f "$MODULE_ROOT_DIRECTORY_PATH/boot.lock" ]] &&	\
+mv --force "$MODULE_ROOT_DIRECTORY_PATH/boot.lock" "$TRASH_DIRECTORY";
+
 [[ -d "$TRASH_DIRECTORY" ]] &&											\
 [[ -f "$MODULE_ROOT_DIRECTORY_PATH/$MODULE_NAMESPACE_VALUE.js" ]] &&	\
 mv --force "$MODULE_ROOT_DIRECTORY_PATH/$MODULE_NAMESPACE_VALUE.js" "$TRASH_DIRECTORY";
