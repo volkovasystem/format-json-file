@@ -3,6 +3,14 @@
 [[ -f "$MODULE_SETUP_LIST_FILE_PATH" ]] &&	\
 cat "$MODULE_SETUP_LIST_FILE_PATH" | xargs -n1 -I {} bash -c "{}";
 
+[[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
+[[ ! -x $(which jq) ]] &&								\
+sudo apt-get install jq --yes;
+
+[[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
+jq 'del(.dependencies)' "$MODULE_PACKAGE_FILE_PATH" |	\
+sponge "$MODULE_PACKAGE_FILE_PATH";
+
 [[ -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
 [[ -f "$MODULE_DEPENDENCY_LIST_FILE_PATH" ]] &&			\
 [[ -f "$MODULE_PACKAGE_FILE_PATH" ]] &&					\
