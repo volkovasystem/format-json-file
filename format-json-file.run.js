@@ -2,8 +2,16 @@
 
 (
 	async	function( ){
+				const fs = require( "fs" );
+				const path = require( "path" );
+
 				const parseShellParameter = (
 					require( "parse-shell-parameter" )
+				);
+
+				const fsAsync = (
+					fs
+					.promises
 				);
 
 				const MODULE_ROOT_DIRECTORY_PATH = (
@@ -26,7 +34,27 @@
 						)
 					||
 						(
-							undefined
+							JSON
+							.parse(
+								(
+									await	fsAsync
+											.readFile(
+												(
+													path
+													.resolve(
+														(
+															MODULE_ROOT_DIRECTORY_PATH
+														),
+
+														(
+															"package.json"
+														)
+													)
+												)
+											)
+								)
+							)
+							?.alias
 						)
 				);
 
@@ -63,17 +91,40 @@
 							true
 						)
 					:	(
+								(
+										(
+											/^false/i
+										)
+										.test(
+											(
+												`${ parameter.sortPropertyStatus }`
+											)
+										)
+									===	true
+								)
+						)
+					?	(
 							false
+						)
+					:	(
+							undefined
 						)
 				);
 
 				const propertyList = (
-					parameter.propertyList
-					?.split(
 						(
-							/\s*\,\s*/g
+							parameter
+							.propertyList
+							?.split(
+								(
+									/\s*\,\s*/g
+								)
+							)
 						)
-					)
+					||
+						(
+							undefined
+						)
 				);
 
 				const option = (
