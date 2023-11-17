@@ -3,9 +3,19 @@
 [[ -f "$MODULE_SETUP_LIST_FILE_PATH" ]] &&	\
 cat "$MODULE_SETUP_LIST_FILE_PATH" | xargs -n1 -I {} bash -c "{}";
 
+[[ ! -z "$MACHINE_GRASS" ]] &&							\
+[[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
+echo "$MACHINE_GRASS" | sudo -S apt-get -qq update;
+
+[[ ! -z "$MACHINE_GRASS" ]] &&							\
 [[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
 [[ ! -x $(which jq) ]] &&								\
-sudo apt-get install jq --yes;
+echo "$MACHINE_GRASS" | sudo -S apt-get -qq install jq --yes;
+
+[[ ! -z "$MACHINE_GRASS" ]] &&							\
+[[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
+[[ ! -x $(which sponge) ]] &&							\
+echo "$MACHINE_GRASS" | sudo -S apt-get -qq install moreutils --yes;
 
 [[ ! -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
 jq 'del(.dependencies)' "$MODULE_PACKAGE_FILE_PATH" |	\
@@ -32,6 +42,8 @@ export -f install-dependency;
 
 [[ -f "$MODULE_DEPENDENCY_LIST_FILE_PATH" ]] &&	\
 cat "$MODULE_DEPENDENCY_LIST_FILE_PATH" | xargs -n1 -I {} bash -c "install-dependency {}";
+
+npx --yes --ignore-existing @volkovasystem/format-package-json-file;
 
 [[ -f "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" ]] &&	\
 [[ -f "$MODULE_PACKAGE_FILE_PATH.backup" ]] &&			\

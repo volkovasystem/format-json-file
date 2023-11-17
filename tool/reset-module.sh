@@ -9,7 +9,7 @@ npx --yes --ignore-existing @volkovasystem/format-package-json-file;
 mv --force "$MODULE_ROOT_DIRECTORY_PATH/setup.lock" "$TRASH_DIRECTORY";
 
 [[ $HARD_RESET_STATUS = true ]] &&						\
-[[ -f "$MODULE_ROOT_DIRECTORY_PATH/boot.lock" ]] &&	\
+[[ -f "$MODULE_ROOT_DIRECTORY_PATH/boot.lock" ]] &&		\
 mv --force "$MODULE_ROOT_DIRECTORY_PATH/boot.lock" "$TRASH_DIRECTORY";
 
 [[ -d "$TRASH_DIRECTORY" ]] &&											\

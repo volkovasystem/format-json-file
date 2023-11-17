@@ -25,4 +25,14 @@ export MODULE_BUILD_TARGET_LIST="node";
 
 export TRASH_DIRECTORY=$(mktemp -d);
 
+load-local-environment-setting( ){
+	set -o allexport;
+	[[ -f "$MODULE_ROOT_DIRECTORY_PATH/.env" ]] &&	\
+	source "$MODULE_ROOT_DIRECTORY_PATH/.env";
+	set +o allexport;
+};
+
+[[ -f "$MODULE_ROOT_DIRECTORY_PATH/.env" ]] &&	\
+load-local-environment-setting;
+
 return 0;
